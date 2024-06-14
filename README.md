@@ -12,7 +12,23 @@ Now every dice you roll will meet the target result you want.
 
 After get the result just click "Origin" to make it back to normal dice.
 
+# Notice
+This module will only work on gameMaster.
+
+This module is not using edit dice method. It is using simulation. So it will only get legal dice result.
+
 # How To Install
 You can install manually with this Manifest URL:
 
 ```https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json```
+
+# Example
+## <=1
+* ![st1_1](image/st1_1.png)
+* ![st1_2](image/st1_2.png)
+* ![st1_3](image/st1_3.png)
+## >=20
+* ![st2_1](image/gt20_1.png)
+* ![st2_2](image/gt20_2.png)
+* ![st2_3](image/gt20_3.png)
+* ![st2_4](image/gt20_4.png)
