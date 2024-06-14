@@ -1,3 +1,4 @@
+English | [繁體中文](README_TCH.md)
 # fvtt-FakeDice
 FakeDice is based on a old module "[Fudge](https://github.com/troygoode/fvtt-fudge)". Since it is old module and have a period of time not update.
 
