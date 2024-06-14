@@ -10,7 +10,7 @@
   "url": "https://github.com/JingShing/fvtt-FakeDice",
   "manifest": "https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json",
   "download": "https://github.com/JingShing/fvtt-FakeDice/releases/download/Ver0.0.1/fvtt-fudge-main.zip",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "compatibility": {
     "minimum": "11.0",
     "verified": "12.325",
