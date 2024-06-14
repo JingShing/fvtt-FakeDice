@@ -28,8 +28,8 @@ Target Operators:
 ```
 
 # How To Install
-You can install manually with this Manifest URL:
-
+* You can get this module on [foundryVTT Module](https://foundryvtt.com/packages/fakedice)
+* You can install manually with this Manifest URL:
 ```
 https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json
 ```
