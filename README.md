@@ -13,4 +13,5 @@ After get the result just click "Origin" to make it back to normal dice.
 
 # How To Install
 You can install manually with this Manifest URL:
+
 ```https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json```
