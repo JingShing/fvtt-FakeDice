@@ -1,5 +1,5 @@
 const TARGET_FORMAT = /([^\d]*)[\s]*([\d]+)/;
-const original_roll_function = window.Roll.prototype.roll;
+const original_roll_function = window.Roll.prototype.evaluate;
 
 const whisperError = (error) => {
   console.error(`Forget VTT | FakeDice | ${error}`);
@@ -88,7 +88,7 @@ const onSubmit = async (doc, replaceOrNot) => {
             whisperError("selected class not found!");
             return;
         }
-        targetClass.prototype.roll = function() {
+        targetClass.prototype.evaluate = async function({minimize=false, maximize=false, allowStrings=false, allowInteractive=true, ...options}={}) {
             const detectTotalToTarget = (total, target) => {
                 switch (target.condition) {
                     case '=':
@@ -104,15 +104,21 @@ const onSubmit = async (doc, replaceOrNot) => {
                 }
             };
             for (let i = 0; i < target.maxAttempts; i++) {
-                const dice = this.clone;
-                const r = this.clone();
-                r.evaluate(options);
-                const total = r.total;
-                if (detectTotalToTarget(total, target)) {
-                    console.log(`Foundry VTT | Fake | Simulate in ${i+1} attempts.`);
-                    return r;
-                }
-            }
+              const dice = this.clone();
+              const r = await dice._evaluate({minimize, maximize, allowStrings, allowInteractive});
+              const total = r.total;
+              if (detectTotalToTarget(total, target)) {
+                  console.log(`Foundry VTT | Fake | Simulate in ${i+1} attempts.`);
+                  this._evaluated = true;
+                  r._evaluated = true;
+                  for (let key in r) {
+                      if (r.hasOwnProperty(key)) {
+                          this[key] = r[key];
+                      }
+                  }
+                  return r;
+              }
+          }
         };
         whisperMessage("function got replaced successfully");
         whisperMessage(`All dices are now can only be roll in ${target.condition}${target.value} in ${target.maxAttempts} times`);
@@ -123,7 +129,7 @@ const onSubmit = async (doc, replaceOrNot) => {
         whisperError("selected class not found!");
         return;
     }
-    targetClass.prototype.roll = original_roll_function;
+    targetClass.prototype.evaluate = original_roll_function;
     whisperMessage("function got back to original successfully");
   }
 }
