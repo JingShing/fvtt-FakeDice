@@ -22,6 +22,7 @@ const whisperMessage = (msg) => {
 
 const parseTarget = (target) => {
   const match = target.match(TARGET_FORMAT);
+  console.log(target);
   const condition = match[1].trim();
   const value = parseInt(match[2].trim());
   switch (condition) {
@@ -66,10 +67,10 @@ const parseTarget = (target) => {
 const parseDialogDoc = (doc) => {
   try {
     const target = parseTarget(doc.find("input[name=target]")[0].value);
+    console.log(target);
     target.maxAttempts = doc.find("input[name=maxAttempts]")[0].value;
-    return {
-      target
-    };
+    console.log(target);
+    return target;
   } catch (e) {
     console.error(e);
     return {
@@ -79,6 +80,7 @@ const parseDialogDoc = (doc) => {
 }
 
 const onSubmit = async (doc, replaceOrNot) => {
+  console.log(doc);
   const target = parseDialogDoc(doc);
   if(replaceOrNot){
         var targetClass = window.Roll;
@@ -164,7 +166,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
     bar.tools.push({
         name: "FakeDice",
         title: "FakeDice",
-        icon: "fas fa-dice",
+        icon: "fas fa-dice-d10",
         onClick: () => showDialog(),
         button: true
     });
