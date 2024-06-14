@@ -1,0 +1,33 @@
+{
+  "name": "FakeDice",
+  "title": "FakeDice",
+  "description": "Get your wanted dice rolls!",
+  "author": 
+  {
+      "name": "JingShing",
+      "email": "jingshing@jingshing.com",
+      "url": "https://github.com/JingShing"
+  },
+  "url": "https://github.com/JingShing/fvtt-FakeDice",
+  "manifest": "https://github.com/JingShing/fvtt-FakeDice/blob/main/module.json",
+  "download": "",
+  "version": "0.0.1",
+  "compatibility": {
+    "minimum": "11.0",
+    "verified": "12.325",
+    "maximum": "12"
+  },
+  "esmodules": ["modules/FakeDice.js"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "zh",
+      "name": "正體中文",
+      "path": "lang/zh.json"
+    }
+]
+}

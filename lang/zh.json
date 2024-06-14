@@ -1,0 +1,6 @@
+{
+  "Fudge.maxAttempts": "maxAttempts",
+  "Fudge.maxAttemptsPlaceholder": "1000",
+  "Fudge.Target": "Target Result",
+  "Fudge.TargetPlaceholder": ">=1"
+}
