@@ -27,6 +27,12 @@
       "lang": "zh",
       "name": "正體中文",
       "path": "lang/zh.json"
+    },
+    {
+      "lang": "ch",
+      "name": "简体中文",
+      "path": "lang/ch.json"
     }
+    
 ]
 }
