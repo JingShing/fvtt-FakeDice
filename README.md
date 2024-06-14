@@ -12,6 +12,11 @@ Now every dice you roll will meet the target result you want.
 
 After get the result just click "Origin" to make it back to normal dice.
 
+# Notice
+This module will only work on gameMaster.
+
+This module is not using edit dice method. It is using simulation. So it will only get legal dice result.
+
 # Operators
 ```
 Target Operators:
@@ -21,11 +26,6 @@ Target Operators:
 <
 <=
 ```
-
-# Notice
-This module will only work on gameMaster.
-
-This module is not using edit dice method. It is using simulation. So it will only get legal dice result.
 
 # How To Install
 You can install manually with this Manifest URL:
