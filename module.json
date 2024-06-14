@@ -1,5 +1,5 @@
 {
-  "name": "FakeDice",
+  "name": "fakedice",
   "title": "FakeDice",
   "description": "Get your wanted dice rolls!",
   "author": [{
@@ -16,7 +16,7 @@
     "verified": "12.325",
     "maximum": "12"
   },
-  "esmodules": ["modules/FakeDice.js"],
+  "esmodules": ["modules/fakedice.js"],
   "languages": [
     {
       "lang": "en",
