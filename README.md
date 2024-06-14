@@ -12,6 +12,16 @@ Now every dice you roll will meet the target result you want.
 
 After get the result just click "Origin" to make it back to normal dice.
 
+# Operators
+```
+Target Operators:
+=
+>
+>=
+<
+<=
+```
+
 # Notice
 This module will only work on gameMaster.
 
@@ -20,7 +30,9 @@ This module is not using edit dice method. It is using simulation. So it will on
 # How To Install
 You can install manually with this Manifest URL:
 
-```https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json```
+```
+https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json
+```
 
 # Example
 ## <=1
