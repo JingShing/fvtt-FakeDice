@@ -30,7 +30,9 @@
 # 如何安裝
 * 你現在可以到官方的 [foundryVTT Module](https://foundryvtt.com/packages/fakedice) 找到並安裝
 * 可以使用以下的連結，進行手動的安裝：
-```https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json```
+```
+https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json
+```
 
 # GM讓玩家使用假骰子範例
 * 打開設定
