@@ -32,7 +32,13 @@
 * 可以使用以下的連結，進行手動的安裝：
 ```https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json```
 
-# 範例
+# GM讓玩家使用假骰子範例
+* 打開設定
+* 選擇 "FakeDice"
+* 啟用 "Player Fake Dice Enable" 選項，讓玩家套用你指定的公式
+* 如果想要復原，就關閉 "Player Fake Dice Enable"
+
+# GM使用假骰子範例
 ## <=1
 * ![st1_1](image/st1_1.png)
 * ![st1_2](image/st1_2.png)
