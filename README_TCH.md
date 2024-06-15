@@ -34,11 +34,16 @@
 https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json
 ```
 
-# GM讓玩家使用假骰子範例
+# 如何讓玩家使用假骰子
 * 打開設定
 * 選擇 "FakeDice"
 * 啟用 "Player Fake Dice Enable" 選項，讓玩家套用你指定的公式
 * 如果想要復原，就關閉 "Player Fake Dice Enable"
+
+## GM 讓玩家使用假骰子範例
+* ![v2_1](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_1.png)
+* ![v2_2](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_2.png)
+* ![v2_3](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_3.png)
 
 # GM使用假骰子範例
 ## <=1
@@ -88,17 +93,6 @@ https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json
 * 你現在可以到官方的 [foundryVTT Module](https://foundryvtt.com/packages/fakedice) 找到並安裝
 * 可以使用以下的連結，進行手動的安裝：
 ```https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json```
-
-# 如何讓玩家使用假骰子
-* 打開設定
-* 選擇 "FakeDice"
-* 啟用 "Player Fake Dice Enable" 選項，讓玩家套用你指定的公式
-* 如果想要復原，就關閉 "Player Fake Dice Enable"
-
-## GM 讓玩家使用假骰子範例
-* ![v2_1](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_1.png)
-* ![v2_2](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_2.png)
-* ![v2_3](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_3.png)
 
 # GM 假骰子範例
 ## <=1
