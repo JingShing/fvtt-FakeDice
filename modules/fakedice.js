@@ -10,6 +10,7 @@ const whisperError = (error) => {
     content: `<div>Error: ${error}</div>`
   });
 };
+
 const whisperMessage = (msg) => {
     console.log(`Forget VTT | FakeDice | ${msg}`);
     ChatMessage.create({
@@ -22,7 +23,6 @@ const whisperMessage = (msg) => {
 
 const parseTarget = (target) => {
   const match = target.match(TARGET_FORMAT);
-  console.log(target);
   const condition = match[1].trim();
   const value = parseInt(match[2].trim());
   switch (condition) {
@@ -67,9 +67,7 @@ const parseTarget = (target) => {
 const parseDialogDoc = (doc) => {
   try {
     const target = parseTarget(doc.find("input[name=target]")[0].value);
-    console.log(target);
     target.maxAttempts = doc.find("input[name=maxAttempts]")[0].value;
-    console.log(target);
     return target;
   } catch (e) {
     console.error(e);
@@ -79,8 +77,79 @@ const parseDialogDoc = (doc) => {
   }
 }
 
+function activePlayerFakeDice(){
+  return;
+}
+
+function registerSetting(){
+  game.settings.register('fakedice', 'PlayerFakeDiceEnabled', {
+    name: 'Player Fake Dice Enabled',
+    hint: 'Player Fake Dice Enabled',
+    scope: 'world',
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: activePlayerFakeDice
+  });
+  game.settings.register('fakedice', 'PlayerFakeDiceFormula', {
+    name: 'Player Fake Dice Formula',
+    hint: 'Player Fake Dice Formula',
+    scope: 'world',
+    config: true,
+    default: ">=1",
+    type: String,
+  });
+
+}
+
+function replacePlayerDice(){
+    var targetClass = window.Roll;
+    if (!targetClass) {
+        whisperError("selected class not found!");
+        return;
+    }
+    targetClass.prototype.evaluate = async function({minimize=false, maximize=false, allowStrings=false, allowInteractive=true, ...options}={}) {
+      var target={value:1, condition:">=", maxAttempts:"1000"};
+      const detectTotalToTarget = (total, target) => {
+        switch (target.condition) {
+            case '=':
+                return total === target.value;
+            case '>':
+                return total > target.value;
+            case '>=':
+                return total >= target.value;
+            case '<':
+                return total < target.value;
+            case '<=':
+                return total <= target.value;
+        }
+    };
+    if(game.settings.get('fakedice', 'PlayerFakeDiceEnabled')){
+      var playerFakeDiceFormula = game.settings.get('fakedice', 'PlayerFakeDiceFormula');
+      var tempTarget = parseTarget(playerFakeDiceFormula);
+      target.condition = tempTarget.condition;
+      target.value = tempTarget.value;
+    }
+    for (let i = 0; i < target.maxAttempts; i++) {
+      const dice = this.clone();
+      const r = await dice._evaluate({minimize, maximize, allowStrings, allowInteractive});
+      const total = r.total;
+      if (detectTotalToTarget(total, target)) {
+          console.log(`Foundry VTT | Fake | Simulate in ${i+1} attempts.`);
+          this._evaluated = true;
+          r._evaluated = true;
+          for (let key in r) {
+              if (r.hasOwnProperty(key)) {
+                  this[key] = r[key];
+              }
+          }
+          return r;
+      }
+  }
+};
+}
+
 const onSubmit = async (doc, replaceOrNot) => {
-  console.log(doc);
   const target = parseDialogDoc(doc);
   if(replaceOrNot){
         var targetClass = window.Roll;
@@ -164,10 +233,11 @@ const showDialog = async () => {
 }
 
 Hooks.on("getSceneControlButtons", (controls) => {
+    registerSetting();
     if (!game.user.isGM) {
+        replacePlayerDice();
         return;
     }
-
     const bar = controls.find((c) => c.name === "token");
     bar.tools.push({
         name: "FakeDice",
