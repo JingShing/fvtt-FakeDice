@@ -34,7 +34,18 @@ Target Operators:
 https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json
 ```
 
-# Example
+# How to make player using fake dice
+* Open Setting
+* Select "FakeDice"
+* Enable the "Player Fake Dice Enable" to replace dice to formula
+* If you want to make it back to normal just disable "Player Fake Dice Enable"
+
+## Player FakeDice example
+* ![v2_1](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_1.png)
+* ![v2_2](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_2.png)
+* ![v2_3](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_3.png)
+
+# FakeDice Example
 ## <=1
 * ![st1_1](image/st1_1.png)
 * ![st1_2](image/st1_2.png)
@@ -100,6 +111,14 @@ https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json
 # Feature
 Now GameMaster can using setting to set fakeDice on players to make them using fake dice.
 
-## example
+# How to use
+* Open Setting
+* Select "FakeDice"
+* Enable the "Player Fake Dice Enable" to replace dice to formula
+* If you want to make it back to normal just disable "Player Fake Dice Enable"
 
+## example
+* ![v2_1](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_1.png)
+* ![v2_2](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_2.png)
+* ![v2_3](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_3.png)
 </details>
