@@ -9,12 +9,12 @@
   }],
   "url": "https://github.com/JingShing/fvtt-FakeDice",
   "manifest": "https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json",
-  "download": "https://github.com/JingShing/fvtt-FakeDice/releases/download/Ver0.0.1/fvtt-FakeDice-main.zip",
+  "download": "https://github.com/JingShing/fvtt-FakeDice/releases/download/Ver0.0.2/fvtt-FakeDice-main.zip",
   "bugs": "https://github.com/JingShing/fvtt-FakeDice/issues",
   "flags": {
     "allowBugReporter": true
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "compatibility": {
     "minimum": "11.0",
     "verified": "12.325",
