@@ -121,4 +121,7 @@ Now GameMaster can using setting to set fakeDice on players to make them using f
 * ![v2_1](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_1.png)
 * ![v2_2](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_2.png)
 * ![v2_3](https://github.com/JingShing/fvtt-FakeDice/blob/main/image/v2_3.png)
+
+## Ver 0.0.3
+* Support on fvtt ver11
 </details>
