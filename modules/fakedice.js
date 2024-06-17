@@ -1,5 +1,17 @@
 const TARGET_FORMAT = /([^\d]*)[\s]*([\d]+)/;
-const original_roll_function = window.Roll.prototype.evaluate;
+var targetClass = window.Roll;
+if (!targetClass) {
+    console.error("window.Roll not found!");
+    targetClass = Roll;
+}
+if (!targetClass) {
+    console.error("Roll not found!");
+    targetClass = null;
+}
+else{
+    console.log("target Class is using Roll!");
+}
+const original_roll_function = targetClass.evaluate;
 
 const whisperError = (error) => {
   console.error(`Forget VTT | FakeDice | ${error}`);
@@ -103,11 +115,6 @@ function registerSetting(){
 }
 
 function replacePlayerDice(){
-    var targetClass = window.Roll;
-    if (!targetClass) {
-        whisperError("selected class not found!");
-        return;
-    }
     targetClass.prototype.evaluate = async function({minimize=false, maximize=false, allowStrings=false, allowInteractive=true, ...options}={}) {
       var target={value:1, condition:">=", maxAttempts:"1000"};
       const detectTotalToTarget = (total, target) => {
@@ -152,11 +159,6 @@ function replacePlayerDice(){
 const onSubmit = async (doc, replaceOrNot) => {
   const target = parseDialogDoc(doc);
   if(replaceOrNot){
-        var targetClass = window.Roll;
-        if (!targetClass) {
-            whisperError("selected class not found!");
-            return;
-        }
         targetClass.prototype.evaluate = async function({minimize=false, maximize=false, allowStrings=false, allowInteractive=true, ...options}={}) {
             const detectTotalToTarget = (total, target) => {
                 switch (target.condition) {
@@ -193,11 +195,6 @@ const onSubmit = async (doc, replaceOrNot) => {
         whisperMessage(`All dices are now can only be roll in ${target.condition}${target.value} in ${target.maxAttempts} times`);
   }
   else{
-    var targetClass = window.Roll;
-    if (!targetClass) {
-        whisperError("selected class not found!");
-        return;
-    }
     targetClass.prototype.evaluate = original_roll_function;
     whisperMessage("function got back to original successfully");
   }
