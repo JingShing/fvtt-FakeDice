@@ -115,7 +115,7 @@ function registerSetting(){
 }
 
 function replacePlayerDice(){
-    targetClass.prototype.evaluate = async function({minimize=false, maximize=false, allowStrings=false, allowInteractive=true, ...options}={}) {
+    targetClass.prototype.evaluate = async function(options={}) {
       var target={value:1, condition:">=", maxAttempts:"1000"};
       const detectTotalToTarget = (total, target) => {
         switch (target.condition) {
@@ -136,23 +136,27 @@ function replacePlayerDice(){
       var tempTarget = parseTarget(playerFakeDiceFormula);
       target.condition = tempTarget.condition;
       target.value = tempTarget.value;
-    }
-    for (let i = 0; i < target.maxAttempts; i++) {
-      const dice = this.clone();
-      const r = await dice._evaluate({minimize, maximize, allowStrings, allowInteractive});
-      const total = r.total;
-      if (detectTotalToTarget(total, target)) {
-          console.log(`Foundry VTT | Fake | Simulate in ${i+1} attempts.`);
-          this._evaluated = true;
-          r._evaluated = true;
-          for (let key in r) {
-              if (r.hasOwnProperty(key)) {
-                  this[key] = r[key];
-              }
-          }
-          return r;
+      for (let i = 0; i < target.maxAttempts; i++) {
+        const dice = this.clone();
+        const r = await dice._evaluate(options);
+        const total = r.total;
+        if (detectTotalToTarget(total, target)) {
+            console.log(`Foundry VTT | Fake | Simulate in ${i+1} attempts.`);
+            this._evaluated = true;
+            r._evaluated = true;
+            for (let key in r) {
+                if (r.hasOwnProperty(key)) {
+                    this[key] = r[key];
+                }
+            }
+            return r;
+        }
       }
-  }
+      console.log("Failed to fake");
+    }
+    else{
+      return this._evaluate(options);
+    }
 };
 }
 
