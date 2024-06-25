@@ -14,10 +14,10 @@
   "flags": {
     "allowBugReporter": true
   },
-  "version": "0.0.3",
+  "version": "0.0.4",
   "compatibility": {
     "minimum": "11.0",
-    "verified": "12.325",
+    "verified": "12.327",
     "maximum": "12"
   },
   "esmodules": ["modules/fakedice.js"],
