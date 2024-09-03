@@ -153,23 +153,20 @@ function replacePlayerDice(){
             return r;
         }
       }
-      // if statement cannot meet will return random result
-      const dice = this.clone();
-      const r = await dice._evaluate(options);
-      const total = r.total;
-      console.log(`Foundry VTT | Fake | Cannot simulate in max attempts.`);
-      this._evaluated = true;
-      r._evaluated = true;
-      for (let key in r) {
-          if (r.hasOwnProperty(key)) {
-              this[key] = r[key];
-          }
-      }
-      return r;
     }
-    else{
-      return this._evaluate(options);
+    // if statement cannot meet will return random result
+    const dice = this.clone();
+    const r = await dice._evaluate(options);
+    const total = r.total;
+    console.log(`Foundry VTT | Fake | Cannot simulate in max attempts.`);
+    this._evaluated = true;
+    r._evaluated = true;
+    for (let key in r) {
+        if (r.hasOwnProperty(key)) {
+            this[key] = r[key];
+        }
     }
+    return r;
 };
 }
 
