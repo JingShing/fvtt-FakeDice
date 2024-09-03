@@ -132,6 +132,7 @@ function replacePlayerDice(){
         }
     };
     if(game.settings.get('fakedice', 'PlayerFakeDiceEnabled')){
+      // player fake dice
       var playerFakeDiceFormula = game.settings.get('fakedice', 'PlayerFakeDiceFormula');
       var tempTarget = parseTarget(playerFakeDiceFormula);
       target.condition = tempTarget.condition;
@@ -152,7 +153,19 @@ function replacePlayerDice(){
             return r;
         }
       }
-      console.log("Failed to fake");
+      // if statement cannot meet will return random result
+      const dice = this.clone();
+      const r = await dice._evaluate(options);
+      const total = r.total;
+      console.log(`Foundry VTT | Fake | Cannot simulate in max attempts.`);
+      this._evaluated = true;
+      r._evaluated = true;
+      for (let key in r) {
+          if (r.hasOwnProperty(key)) {
+              this[key] = r[key];
+          }
+      }
+      return r;
     }
     else{
       return this._evaluate(options);
@@ -194,6 +207,19 @@ const onSubmit = async (doc, replaceOrNot) => {
                   return r;
               }
           }
+          // if statement cannot meet will return random result
+          const dice = this.clone();
+          const r = await dice._evaluate(options);
+          const total = r.total;
+          console.log(`Foundry VTT | Fake | Cannot simulate in max attempts.`);
+          this._evaluated = true;
+          r._evaluated = true;
+          for (let key in r) {
+              if (r.hasOwnProperty(key)) {
+                  this[key] = r[key];
+              }
+          }
+          return r;
         };
         whisperMessage("function got replaced successfully");
         whisperMessage(`All dices are now can only be roll in ${target.condition}${target.value} in ${target.maxAttempts} times`);
