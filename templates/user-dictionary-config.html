@@ -1,0 +1,14 @@
+<form>
+  {{#each users}}
+    <div class="form-group">
+      <label>{{this.name}}</label>
+      <input type="text" name="{{this.id}}" value="{{this.value}}" placeholder="Enter a value">
+    </div>
+  {{/each}}
+
+  <!-- Add Save and Reset buttons -->
+  <div class="form-group">
+    <button type="submit" name="save">Save</button>
+    <button type="button" name="reset">Reset</button>
+  </div>
+</form>
