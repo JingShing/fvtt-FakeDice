@@ -135,46 +135,13 @@ function detectTotalToTarget(total, target) {
   }
 }
 
-// Show dialog for GM to switch between FakeDice and original function
-async function showDialog() {
-  const html = await renderTemplate("/modules/FakeDice/templates/dialog.html");
-  return new Dialog({
-    title: 'FakeDice',
-    content: html,
-    buttons: {
-      yes: {
-        label: "Replace",
-        callback: (html) => onSubmit(html, true)
-      },
-      no: {
-        label: "Original",
-        callback: (html) => onSubmit(html, false)
-      }
-    },
-    default: "no"
-  }).render(true);
+// Function to open UserDictionaryConfig form
+function openUserDictionaryConfig() {
+  const form = new UserDictionaryConfig();
+  form.render(true); // Open the form
 }
 
-async function onSubmit(html, replace) {
-  if (replace) {
-    replacePlayerDice();
-    whisperMessage("Dice rolling has been replaced with FakeDice.");
-  } else {
-    targetClass.prototype.evaluate = original_roll_function;
-    whisperMessage("Dice rolling restored to the original function.");
-  }
-}
-
-function whisperMessage(message) {
-  ChatMessage.create({
-    user: game.user._id,
-    whisper: [game.user._id],
-    flavor: "FakeDice",
-    content: `<div>${message}</div>`
-  });
-}
-
-// GM control for showing the FakeDice dialog
+// GM control for showing the FakeDice form
 Hooks.on("getSceneControlButtons", (controls) => {
   const tokenControl = controls.find((c) => c.name === "token");
   if (!game.user.isGM) return replacePlayerDice();
@@ -183,7 +150,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
     name: "FakeDice",
     title: "FakeDice",
     icon: "fas fa-dice-d10",
-    onClick: () => showDialog(),
+    onClick: () => openUserDictionaryConfig(), // Open the user dictionary form
     button: true
   });
 });
