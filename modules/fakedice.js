@@ -89,8 +89,9 @@ function replacePlayerDice() {
       const dice = this.clone();
       const r = await dice._evaluate(options);
       if (detectTotalToTarget(r.total, target)) {
-        Object.assign(this, r);
+        this._evaluated = true;
         r._evaluated = true;
+        Object.assign(this, r);
         return r;
       }
     }
@@ -98,7 +99,6 @@ function replacePlayerDice() {
     // If no valid roll is found, return the original roll result
     const fallbackResult = await originalRollFunction.call(this, options);
     Object.assign(this, fallbackResult);
-    fallbackResult._evaluated = true;
     return fallbackResult;
   };
 }
