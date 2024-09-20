@@ -1,24 +1,3 @@
-// Register custom setting for Fake Dice functionality
-function registerSettings() {
-  game.settings.register('fakedice', 'PlayerFakeDiceEnabled', {
-    name: 'Player Fake Dice Enabled',
-    hint: 'Enables or disables Fake Dice for players.',
-    scope: 'world',
-    config: true,
-    default: false,
-    type: Boolean,
-  });
-
-  game.settings.register('fakedice', 'PlayerFakeDiceFormula', {
-    name: 'Player Fake Dice Formula',
-    hint: 'Custom dice roll condition (e.g., >=1).',
-    scope: 'world',
-    config: true,
-    default: ">=1",
-    type: String,
-  });
-}
-
 // Register menu for editing the user dictionary
 function registerUserDictionaryMenu() {
   game.settings.registerMenu('fakedice', 'userDictionaryMenu', {
@@ -96,9 +75,12 @@ function replacePlayerDice() {
   const originalRollFunction = targetClass.prototype.evaluate;
 
   targetClass.prototype.evaluate = async function(options = {}) {
-    const target = { value: 1, condition: ">=", maxAttempts: 1000 };
+    const userDictionary = game.settings.get('fakedice', 'userDictionary');
+    const userId = game.user.id; // Get the current player's ID
+    const playerFakeDiceFormula = userDictionary[userId] || ""; // Default to ">=1" if no formula is found
 
-    const playerFakeDiceFormula = game.settings.get('fakedice', 'PlayerFakeDiceFormula');
+    // Parse the formula for the current player
+    const target = { value: 1, condition: "", maxAttempts: 1000 };
     const tempTarget = parseTarget(playerFakeDiceFormula);
     target.condition = tempTarget.condition;
     target.value = tempTarget.value;
@@ -108,22 +90,31 @@ function replacePlayerDice() {
       const r = await dice._evaluate(options);
       if (detectTotalToTarget(r.total, target)) {
         Object.assign(this, r);
+        r._evaluated = true;
         return r;
       }
     }
 
+    // If no valid roll is found, return the original roll result
     const fallbackResult = await originalRollFunction.call(this, options);
     Object.assign(this, fallbackResult);
+    fallbackResult._evaluated = true;
     return fallbackResult;
   };
 }
 
+
 function parseTarget(targetString) {
   const match = targetString.match(/([^\d]*)[\s]*([\d]+)/);
-  if (!match) return { condition: "=", value: 0 };
+  if (!match) {
+    // Return a default value if the string does not match the expected format
+    return { condition: "", value: 1 }; // Default to ">=" condition with a value of 1
+  }
+
   const [_, condition, value] = match;
   return { condition: condition.trim(), value: parseInt(value) };
 }
+
 
 function detectTotalToTarget(total, target) {
   switch (target.condition) {
@@ -132,6 +123,7 @@ function detectTotalToTarget(total, target) {
     case '>=': return total >= target.value;
     case '<': return total < target.value;
     case '<=': return total <= target.value;
+    default: return false;
   }
 }
 
@@ -144,7 +136,8 @@ function openUserDictionaryConfig() {
 // GM control for showing the FakeDice form
 Hooks.on("getSceneControlButtons", (controls) => {
   const tokenControl = controls.find((c) => c.name === "token");
-  if (!game.user.isGM) return replacePlayerDice();
+  replacePlayerDice();
+  if (!game.user.isGM) return;
 
   tokenControl.tools.push({
     name: "FakeDice",
@@ -157,6 +150,5 @@ Hooks.on("getSceneControlButtons", (controls) => {
 
 // Register settings and handle player fake dice functionality
 Hooks.once('init', () => {
-  registerSettings();
   registerUserDictionaryMenu();
 });
