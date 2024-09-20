@@ -30,7 +30,7 @@ class UserDictionaryConfig extends FormApplication {
       title: "User Dictionary Configuration",
       template: "/modules/FakeDice/templates/user-dictionary-config.html",
       width: 400,
-      closeOnSubmit: true,
+      closeOnSubmit: false,
       submitOnChange: true,
       submitOnClose: true
     });
