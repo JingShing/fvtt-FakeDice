@@ -3,12 +3,12 @@
   "description": "Get your wanted dice rolls!",
   "url": "https://github.com/JingShing/fvtt-FakeDice",
   "manifest": "https://raw.githubusercontent.com/JingShing/fvtt-FakeDice/main/module.json",
-  "download": "https://github.com/JingShing/fvtt-FakeDice/releases/download/Ver0.0.5/fvtt-FakeDice-main.zip",
+  "download": "https://github.com/JingShing/fvtt-FakeDice/releases/download/Ver0.0.6/fvtt-FakeDice-main.zip",
   "bugs": "https://github.com/JingShing/fvtt-FakeDice/issues",
   "flags": {
     "allowBugReporter": true
   },
-  "version": "0.0.5",
+  "version": "0.0.6",
   "compatibility": {
     "minimum": "11",
     "verified": "12.331",
