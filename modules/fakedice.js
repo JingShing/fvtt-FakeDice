@@ -28,7 +28,7 @@ class UserDictionaryConfig extends FormApplication {
     return mergeObject(super.defaultOptions, {
       id: "user-dictionary-config",
       title: "Fake Dice Panel",
-      template: "/modules/FakeDice/templates/user-dictionary-config.html",
+      template: "/modules/fakedice/templates/user-dictionary-config.html",
       width: 400,
       closeOnSubmit: false,
       submitOnChange: true,
